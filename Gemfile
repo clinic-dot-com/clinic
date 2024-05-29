@@ -16,8 +16,8 @@ gem 'stimulus-rails'
 gem 'bootsnap', require: false
 
 group :development, :test do
-  gem 'byebug', platforms: %i[mri windows]
   gem 'brakeman'
+  gem 'byebug', platforms: %i[mri windows]
 end
 
 group :development do

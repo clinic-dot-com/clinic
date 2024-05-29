@@ -1,4 +1,7 @@
 AllCops:
+  TargetRubyVersion: 3.2
   NewCops: disable
   Exclude:
     - 'bin/**/*'
+    - db/schema.rb
+    - 'vendor/**/*'
