@@ -17,6 +17,7 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri windows]
+  gem 'brakeman'
 end
 
 group :development do
