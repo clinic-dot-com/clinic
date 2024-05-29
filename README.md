@@ -1,5 +1,7 @@
 # README
 
+[![Actions Status](https://github.com/clinic-dot-com/clinic/workflows/rubyonrails/badge.svg)](https://github.com/clinic-dot-com/clinic/actions)
+
 The clinic management system
 
 * Ruby version 3.2.2
