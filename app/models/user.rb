@@ -9,4 +9,12 @@ class User < ApplicationRecord
 
   validates :phone, presence: true, uniqueness: true
   enum role: { patient: 'patient', doctor: 'doctor', admin: 'admin' }
+
+  def email_required?
+    false
+  end
+
+  def will_save_change_to_email?
+    false
+  end
 end
