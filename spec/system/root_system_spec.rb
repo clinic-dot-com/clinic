@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Root path", type: :system do
+RSpec.describe 'Root path' do
   before { driven_by(:rack_test) }
 
   context 'when visit root path' do

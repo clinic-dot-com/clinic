@@ -5,3 +5,7 @@ AllCops:
     - 'bin/**/*'
     - db/schema.rb
     - 'vendor/**/*'
+
+Style/Documentation:
+  Exclude:
+    - 'db/migrate/**/*'
