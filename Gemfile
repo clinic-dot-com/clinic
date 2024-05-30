@@ -44,3 +44,5 @@ gem 'bundle-audit'
 gem 'rubocop', '~> 1.64'
 
 gem 'devise'
+
+gem 'cancancan'
