@@ -13,3 +13,4 @@ Style/Documentation:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+    - 'app/admin/**/*'
