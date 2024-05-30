@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+ .build-info {
+    right: 10px;
+    bottom: 10px;
+    position: absolute;
+ }
