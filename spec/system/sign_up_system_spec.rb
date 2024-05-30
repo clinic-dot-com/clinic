@@ -16,7 +16,7 @@ RSpec.describe 'Sign Up' do
       expect(page).to have_button 'Sign up'
       expect(page).to have_link 'Log in'
       expect(page).to have_select 'Role'
-      expect(page).to have_link count: 1
+      expect(page).to have_link count: 2
       expect(page).to have_field count: 4
     end
   end
