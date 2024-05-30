@@ -17,7 +17,7 @@
     <% current_tag = `git describe --tags` %>
     <% commit_version = `git rev-parse --short HEAD` %>
     <footer class="build-info">
-      <span>Build information: <%=  pp("version: #{current_tag}, commit: #{commit_version},") %></span>
+      <span>Build information: <%=  "version: #{current_tag}, commit: #{commit_version}," %></span>
       <%= link_to('Status page', 'https://clinic.betteruptime.com') %>
     </footer>
   </body>
