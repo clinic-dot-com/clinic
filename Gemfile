@@ -18,6 +18,7 @@ gem 'bootsnap', require: false
 group :development, :test do
   gem 'brakeman'
   gem 'byebug', platforms: %i[mri windows]
+  gem 'capybara_active_admin'
 end
 
 group :development do
@@ -47,3 +48,7 @@ gem 'rubocop', '~> 1.64'
 gem 'devise'
 
 gem 'cancancan'
+
+gem 'activeadmin'
+
+gem 'sassc-rails', '~> 2.1'

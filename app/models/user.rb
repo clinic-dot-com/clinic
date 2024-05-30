@@ -25,11 +25,18 @@ class User < ApplicationRecord
   validates :phone, presence: true, uniqueness: true
   enum role: { patient: 'patient', doctor: 'doctor', admin: 'admin' }
 
+  scope :doctors, -> { where(role: 'doctor') }
+
   def email_required?
     false
   end
 
   def will_save_change_to_email?
     false
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at encrypted_password id id_value phone remember_created_at reset_password_sent_at
+       reset_password_token role updated_at]
   end
 end
