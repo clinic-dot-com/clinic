@@ -14,38 +14,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_105949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "appointments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "doctor_id", null: false
-    t.string "status"
-    t.text "recommendation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
-    t.index ["user_id"], name: "index_appointments_on_user_id"
-  end
-
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "doctor_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_doctor_categories_on_name", unique: true
-  end
-
-  create_table "doctors", force: :cascade do |t|
-    t.string "name"
-    t.bigint "category_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_doctors_on_category_id"
-    t.index ["user_id"], name: "index_doctors_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,9 +33,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_105949) do
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_foreign_key "appointments", "doctors"
-  add_foreign_key "appointments", "users"
-  add_foreign_key "doctors", "categories"
-  add_foreign_key "doctors", "users"
 end
