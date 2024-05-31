@@ -12,18 +12,44 @@ ActiveAdmin.register Doctor do
     permitted
   end
 
+  action_item '', only: :show do
+    if authorized?(:change_doctor_categoty)
+      link_to 'Change Category',
+              change_doctor_categoty_admin_doctor_path(resource),
+              class: 'modal-link',
+              data: {
+                method: :patch,
+                inputs: {
+                  'Doctor category': DoctorCategory.pluck(:name, :id).push(['blank', nil])
+                }.to_json
+              }
+    end
+  end
+
   index download_links: false do
     id_column
     column :phone
+    column :category
     column :created_at
     column :updated_at
-    actions
+    actions do |row|
+      link_to 'Change Category',
+              change_doctor_categoty_admin_doctor_path(row),
+              class: 'modal-link',
+              data: {
+                method: :patch,
+                inputs: {
+                  'Doctor category': DoctorCategory.pluck(:name, :id).push(['blank', nil])
+                }.to_json
+              }
+    end
   end
 
   show do
     attributes_table do
       row :id
       row :phone
+      row :doctor_category
     end
   end
 

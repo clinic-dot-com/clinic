@@ -39,4 +39,24 @@ RSpec.describe 'Signed as Admin', type: :system do
       expect(page).to have_selector '#page_title', exact_text: patient.display_name
     end
   end
+
+  context 'when admin from index page of doctors page change its category' do
+    subject { click_button :OK }
+
+    let(:doctor_attrs) { { role: 'doctor', phone: '380978888888', doctor_category: nil } }
+    let!(:doctor) { FactoryBot.create(:user, doctor_attrs) }
+    let!(:doctor_category) { FactoryBot.create(:doctor_category) }
+
+    before do
+      driven_by(:selenium_chrome_headless)
+      visit admin_doctors_path
+      click_link 'Change Category'
+      within('#dialog_confirm') { select doctor_category.name, from: 'Doctor category' }
+    end
+
+    it 'should change category' do
+      expect { subject }.to change { doctor.reload.doctor_category }.from(nil).to(doctor_category)
+      expect(page).to have_selector '.flash', text: 'The categoty was successfully changed'
+    end
+  end
 end
