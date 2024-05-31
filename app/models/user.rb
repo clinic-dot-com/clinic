@@ -10,7 +10,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :string           not null
+#  role                   :string           default("patient"), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -20,10 +20,24 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  module CONST # :nodoc:
+    PETIENT_ROLE_NAME = 'parient'
+    DOCTOR_ROLE_NAME = 'doctor'
+    ADMIN_ROLE_NAME = 'admin'
+
+    DEFAULT_ROLE = PETIENT_ROLE_NAME
+
+    freeze
+  end
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   validates :phone, presence: true, uniqueness: true
-  enum role: { patient: 'patient', doctor: 'doctor', admin: 'admin' }
+  enum role: {
+    patient: CONST::DEFAULT_ROLE,
+    doctor: CONST::DOCTOR_ROLE_NAME,
+    admin: CONST::ADMIN_ROLE_NAME
+  }, _default: CONST::DEFAULT_ROLE
 
   scope :doctors, -> { where(role: 'doctor') }
 
