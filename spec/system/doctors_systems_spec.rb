@@ -20,7 +20,7 @@ RSpec.describe 'Doctor system spec', type: :system do
 
         it 'should render index page properly' do
           expect(page).to have_title 'Doctors'
-          expect(page).to have_selector "tr#user_#{doctor.id}"
+          expect(page).to have_selector "tr#doctor_#{doctor.id}"
         end
       end
     end

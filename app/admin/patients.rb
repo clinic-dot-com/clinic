@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register User, as: 'Doctor' do
+ActiveAdmin.register Patient do
   controller do
     def scoped_collection
-      super.doctors
+      super.patients
     end
   end
 
@@ -32,7 +32,7 @@ ActiveAdmin.register User, as: 'Doctor' do
       f.input :phone, input_html: { autofocus: :autofocus }
       f.input :password
       f.input :password_confirmation
-      f.input :role, as: :hidden, input_html: { value: 'doctor' }
+      f.input :role, as: :hidden, input_html: { value: User::CONST::PETIENT_ROLE_NAME }
     end
 
     f.actions

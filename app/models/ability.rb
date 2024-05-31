@@ -22,8 +22,9 @@ class Ability
   end
 
   def doctor_abilities(user)
-    can :read, :all
-    can :update, User, id: user.id
+    can :manage, ActiveAdmin::Page, name: 'Dashboard'
+    can :manage, DoctorCategory
+    can :manage, Doctor
     can :manage, Appointment, doctor_id: user.id
   end
 
