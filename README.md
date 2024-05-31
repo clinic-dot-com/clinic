@@ -4,6 +4,10 @@
 
 [![Status Page](https://img.shields.io/badge/Status%20Page-blue.svg)](https://clinic.betteruptime.com)
 
+to sign in as admin use this super secure credentials:
+phone: 380970000000
+password: qwerty80
+
 The clinic management system
 
 * Ruby version 3.2.2
