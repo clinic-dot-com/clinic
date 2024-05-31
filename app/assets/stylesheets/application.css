@@ -19,3 +19,16 @@
     bottom: 10px;
     position: absolute;
  }
+
+ .container {
+   height: 100%;
+   margin: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .center-text {
+   text-align: center;
+   display: block
+}
