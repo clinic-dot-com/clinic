@@ -27,10 +27,9 @@ class Ability
     can :manage, Appointment, doctor_id: user.id
   end
 
-  def patient_abilities(user)
+  def patient_abilities(_user)
     can :manage, ActiveAdmin::Page, name: 'Dashboard'
     can :read, User, role: 'doctor'
-    can :manage, Appointment, user_id: user.id
-    can :read, User, id: user.id
+    can :destroy, Appointment
   end
 end

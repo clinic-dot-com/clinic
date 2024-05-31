@@ -9,6 +9,7 @@
 #  status         :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  doctor_id      :bigint
 #  user_id        :bigint           not null
 #
 # Indexes
@@ -17,6 +18,7 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (doctor_id => users.id)
 #  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do

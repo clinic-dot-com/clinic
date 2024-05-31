@@ -32,7 +32,7 @@ RSpec.describe 'Doctor system spec', type: :system do
         before { visit admin_doctor_path(doctor) }
 
         it 'should render index page properly' do
-          expect(page).to have_selector '#page_title', exact_text: "User ##{doctor.id}"
+          expect(page).to have_selector '#page_title', exact_text: doctor.display_name
         end
       end
     end

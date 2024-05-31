@@ -52,3 +52,5 @@ gem 'cancancan'
 gem 'activeadmin'
 
 gem 'sassc-rails', '~> 2.1'
+
+gem 'haml'
