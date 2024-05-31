@@ -1,0 +1,11 @@
+= semantic_form_for @form, url: url_for(action: :submit_create_appointment), method: :post do |f|
+  = f.semantic_errors *f.object.errors.attribute_names
+  = f.inputs do
+    = f.label :doctor_id
+    = f.select :doctor_id, collection: User.doctors.map { |item| [item.display_name, item.id] }
+    = f.hidden_field :status, value: 'new'
+    = f.hidden_field :user_id, value: current_user.id
+
+  = f.actions do
+    = f.action :submit, label: 'Submit', button_html: { disable_with: 'Wait...' }
+    = f.action :cancel, as: :link, label: 'Cancel'

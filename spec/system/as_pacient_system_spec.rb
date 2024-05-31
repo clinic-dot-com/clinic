@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-describe 'Sign in as Pacient' do
-  let!(:admin_attrs) { { phone: '1111', role: :pacient } }
-  let!(:admin) { FactoryBot.create(:user) }
+describe 'Sign in as Patient' do
+  let!(:patient_attrs) { { phone: '1111', role: :patient } }
+  let!(:patient) { FactoryBot.create(:user, patient_attrs) }
 
   before do
     driven_by(:rack_test)
-    sign_in admin
+    sign_in patient
   end
 
   context 'when visit "/admin/dashboard"' do
@@ -17,22 +17,47 @@ describe 'Sign in as Pacient' do
     end
   end
 
-  describe 'Appointments menu item is present' do
+  describe 'Appointments menu item is NOT present' do
     before { visit '/admin/dashboard' }
 
     it 'should render Appointments menu item' do
       within('.header') do
-        expect(page).to have_link 'Appointments'
+        expect(page).not_to have_link 'Appointments'
       end
     end
   end
 
-  context 'when visit Appointment index page' do
-    before { visit '/admin/appointments' }
+  context 'when create appointment' do
+    subject { click_button 'Submit' }
 
-    it 'should render Appointments index page properly' do
-      expect(page).to have_link 'New Appointment'
-      expect(page).to have_selector '.blank_slate', text: 'There are no Appointments yet.'
+    let!(:doctor) { FactoryBot.create(:user, role: :doctor, phone: '888888') }
+
+    before do
+      visit '/admin/dashboard'
+      click_link 'Create Appointment'
+      select doctor.display_name, from: 'Doctor'
+    end
+
+    it 'should create new appointment and redirect to dashboard with green flash message' do
+      expect { subject }.to change(Appointment.where(doctor:, user: patient), :count).by(1)
+      expect(page).to have_selector '.flash', exact_text: 'The appointment was successfully created'
+    end
+  end
+
+  context 'destroy appointment' do
+    subject { click_link 'Delete' }
+
+    let!(:doctor) { FactoryBot.create(:user, role: :doctor, phone: '888888') }
+    let!(:appointment) { FactoryBot.create(:appointment, doctor:, user: patient, recommendation: 'string') }
+
+    before do
+      visit '/admin/dashboard'
+    end
+
+    it 'should render appointment assigned to current patient' do
+      expect { subject }.to change(Appointment, :count).by(-1)
+      expect(page).to have_selector '.flash', exact_text: 'The Appointment was successfully destroyd.'
+      expect(page).to have_current_path admin_dashboard_path
     end
   end
 end

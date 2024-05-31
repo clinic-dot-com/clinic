@@ -53,4 +53,8 @@ class User < ApplicationRecord
     %w[created_at encrypted_password id id_value phone remember_created_at reset_password_sent_at
        reset_password_token role updated_at]
   end
+
+  def display_name
+    "#{role.humanize} | ##{id} | #{phone}"
+  end
 end
