@@ -28,19 +28,39 @@ describe 'Sign in as Patient' do
   end
 
   context 'when create appointment' do
-    subject { click_button 'Submit' }
+    subject { click_button 'OK' }
 
     let!(:doctor) { FactoryBot.create(:user, role: :doctor, phone: '888888') }
 
     before do
+      driven_by(:selenium_chrome_headless)
       visit '/admin/dashboard'
       click_link 'Create Appointment'
-      select doctor.display_name, from: 'Doctor'
+      select doctor.display_name, from: 'Desired Doctor'
     end
 
     it 'should create new appointment and redirect to dashboard with green flash message' do
       expect { subject }.to change(Appointment.where(doctor:, user: patient), :count).by(1)
       expect(page).to have_selector '.flash', exact_text: 'The appointment was successfully created'
+    end
+  end
+
+  context 'when create eleventh appointment' do
+    subject { click_button 'OK' }
+
+    let!(:doctor) { FactoryBot.create(:user, role: :doctor, phone: '888888') }
+    let!(:appointment) { FactoryBot.create_list(:appointment, 10, doctor:, user: patient, recommendation: nil) }
+
+    before do
+      driven_by(:selenium_chrome_headless)
+      visit '/admin/dashboard'
+      click_link 'Create Appointment'
+      select doctor.display_name, from: 'Desired Doctor'
+    end
+
+    it 'should create new appointment and redirect to dashboard with green flash message' do
+      expect { subject }.not_to change(Appointment.where(doctor:, user: patient), :count)
+      expect(page).to have_selector '.flash', exact_text: "The #{doctor.display_name} is not available at the moment"
     end
   end
 

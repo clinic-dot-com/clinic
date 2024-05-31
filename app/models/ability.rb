@@ -30,7 +30,6 @@ class Ability
   def patient_abilities(_user)
     can :manage, ActiveAdmin::Page, name: 'Dashboard'
     can :destroy, Appointment
-    can :create_appointment_form, :all
     can :submit_create_appointment, :all
   end
 end

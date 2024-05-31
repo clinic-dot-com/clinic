@@ -4,13 +4,14 @@
 #
 # Table name: appointments
 #
-#  id             :bigint           not null, primary key
-#  recommendation :text
-#  status         :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  doctor_id      :bigint
-#  user_id        :bigint           not null
+#  id               :bigint           not null, primary key
+#  appointment_date :date
+#  recommendation   :text
+#  status           :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  doctor_id        :bigint
+#  user_id          :bigint           not null
 #
 # Indexes
 #
