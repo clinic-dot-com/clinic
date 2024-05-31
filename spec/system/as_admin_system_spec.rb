@@ -59,4 +59,20 @@ RSpec.describe 'Signed as Admin', type: :system do
       expect(page).to have_selector '.flash', text: 'The categoty was successfully changed'
     end
   end
+
+  context 'when visit show page of doctor categoty' do
+    let!(:doctor_category) { FactoryBot.create(:doctor_category) }
+    let(:doctor_attrs) { { role: 'doctor', phone: '380978888888', doctor_category: } }
+    let!(:doctor) { FactoryBot.create(:user, doctor_attrs) }
+
+    before do
+      visit admin_doctor_category_path(doctor_category)
+    end
+
+    it 'should render show page of specific Doctor Category' do
+      expect(page).to have_selector 'h2', text: doctor_category.name
+      expect(page).to have_content 'Assigned Doctors'
+      expect(page).to have_content '380978888888'
+    end
+  end
 end

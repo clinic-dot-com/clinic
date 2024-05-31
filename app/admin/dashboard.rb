@@ -17,7 +17,7 @@ ActiveAdmin.register_page 'Dashboard' do
               data: {
                 method: :patch,
                 inputs: {
-                  'Doctor category': DoctorCategory.pluck(:name, :id).push(['blank', nil])
+                  'Doctor category': DoctorCategory.pluck(:name, :id).unshift(['blank', nil])
                 }.to_json
               }
     end
