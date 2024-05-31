@@ -39,7 +39,8 @@ class User < ApplicationRecord
     admin: CONST::ADMIN_ROLE_NAME
   }, _default: CONST::DEFAULT_ROLE
 
-  scope :doctors, -> { where(role: 'doctor') }
+  scope :patients, -> { where(role: User::CONST::PETIENT_ROLE_NAME) }
+  scope :doctors, -> { where(role: User::CONST::DOCTOR_ROLE_NAME) }
 
   def email_required?
     false
