@@ -46,6 +46,18 @@ ActiveAdmin.register Appointment do
     render partial: 'create_appointment_form'
   end
 
+  member_action :leave_appointment, method: :post do
+    recommendation = params.fetch(:recommendation)
+    if recommendation.present?
+      resource.update!(recommendation:)
+      flash[:notice] = 'The recommendation was successfully created'
+    else
+      flash[:error] = 'The recommendation is not specified'
+    end
+
+    redirect_back(fallback_location: admin_dashboard_path)
+  end
+
   member_action :submit_create_appointment, method: :post do
     authorize!(:submit_create_appointment)
     permitted_params = params.require(:appointment).permit(:user_id, :doctor_id, :status)

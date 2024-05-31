@@ -37,4 +37,12 @@ ActiveAdmin.register Doctor do
 
     f.actions
   end
+
+  member_action :change_doctor_categoty, method: :patch do
+    doctor_category_id = params.fetch('Doctor category')
+    resource.update!(doctor_category_id:)
+    flash[:notice] = 'The categoty was successfully changed'
+
+    redirect_back(fallback_location: admin_dashboard_path)
+  end
 end
