@@ -23,7 +23,6 @@ class Ability
 
   def doctor_abilities(_user)
     can :manage, ActiveAdmin::Page, name: 'Dashboard'
-    can :manage, DoctorCategory
     can :leave_appointment, :all
     can :change_doctor_categoty, :all
   end

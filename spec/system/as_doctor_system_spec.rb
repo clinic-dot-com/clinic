@@ -57,13 +57,10 @@ RSpec.describe 'Signed as Doctor User' do
     before do
       driven_by :rack_test
       visit '/admin/dashboard'
-      click_link 'Doctor Categories'
     end
 
-    it 'should render index page properly' do
-      expect(page).to have_selector 'h2', exact_text: 'Doctor Categories'
-      expect(page).to have_link 'New Doctor Category'
-      expect(page).to have_content 'default cat'
+    it 'should NOT render Doctor Categories menu item' do
+      expect(page).not_to have_link 'Doctor Categories'
     end
   end
 
