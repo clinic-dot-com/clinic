@@ -32,5 +32,7 @@ class Ability
     can :manage, ActiveAdmin::Page, name: 'Dashboard'
     can :read, User, role: 'doctor'
     can :destroy, Appointment
+    can :create_appointment_form, :all
+    can :submit_create_appointment, :all
   end
 end
