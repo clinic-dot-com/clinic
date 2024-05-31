@@ -40,12 +40,6 @@ ActiveAdmin.register Appointment do
     f.actions
   end
 
-  member_action :create_appointment_form, method: :get do
-    authorize!(:create_appointment_form)
-    @form = resource_class.new
-    render partial: 'create_appointment_form'
-  end
-
   member_action :leave_appointment, method: :post do
     recommendation = params.fetch(:recommendation)
     if recommendation.present?
@@ -60,11 +54,17 @@ ActiveAdmin.register Appointment do
 
   member_action :submit_create_appointment, method: :post do
     authorize!(:submit_create_appointment)
-    permitted_params = params.require(:appointment).permit(:user_id, :doctor_id, :status)
-    @form = Appointment.new(permitted_params)
+    appointment_date = params.fetch('Date').presence || Date.today
+    doctor_id = params.fetch('Desired Doctor')
+    @form = Appointment.new(user_id: current_user.id, appointment_date:, doctor_id:, status: 'new')
+    doctor = Doctor.find(doctor_id)
+    raise "The #{doctor.display_name} is not available at the moment" if doctor.patients.count >= 10
+
     @form.save!
     flash[:notice] = 'The appointment was successfully created'
   rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = e.message
+  rescue StandardError => e
     flash[:error] = e.message
   ensure
     redirect_to admin_dashboard_path
