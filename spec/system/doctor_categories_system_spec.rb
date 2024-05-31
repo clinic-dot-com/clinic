@@ -2,7 +2,7 @@
 
 RSpec.describe 'Doctor Categoty stem spec', type: :system do
   let!(:admin_attrs) { { phone: '380970000000' } }
-  let!(:admin) { FactoryBot.create(:user) }
+  let!(:admin) { FactoryBot.create(:user, admin_attrs) }
 
   before do
     driven_by(:rack_test)
