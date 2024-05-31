@@ -19,6 +19,8 @@ group :development, :test do
   gem 'brakeman'
   gem 'byebug', platforms: %i[mri windows]
   gem 'capybara_active_admin'
+  gem 'rubocop'
+  gem 'rubocop-haml'
 end
 
 group :development do
@@ -42,8 +44,6 @@ group :test do
 end
 
 gem 'bundle-audit'
-
-gem 'rubocop', '~> 1.64'
 
 gem 'devise'
 

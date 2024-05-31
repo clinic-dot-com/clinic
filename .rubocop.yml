@@ -1,3 +1,6 @@
+require:
+  - rubocop-haml
+
 AllCops:
   TargetRubyVersion: 3.2
   NewCops: disable
