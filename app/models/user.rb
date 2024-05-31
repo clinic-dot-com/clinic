@@ -13,11 +13,16 @@
 #  role                   :string           default("patient"), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  doctor_category_id     :bigint
 #
 # Indexes
 #
 #  index_users_on_phone                 (phone) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (doctor_category_id => doctor_categories.id)
 #
 class User < ApplicationRecord
   module CONST # :nodoc:
@@ -42,6 +47,8 @@ class User < ApplicationRecord
   scope :patients, -> { where(role: User::CONST::PETIENT_ROLE_NAME) }
   scope :doctors, -> { where(role: User::CONST::DOCTOR_ROLE_NAME) }
 
+  belongs_to :doctor_category, optional: true
+
   def email_required?
     false
   end
@@ -56,6 +63,10 @@ class User < ApplicationRecord
   end
 
   def display_name
-    "#{role.humanize} | ##{id} | #{phone}"
+    if doctor_category_id.present?
+      "#{role.humanize} | ##{id} | #{phone} | #{doctor_category.name}"
+    else
+      "#{role.humanize} | ##{id} | #{phone}"
+    end
   end
 end

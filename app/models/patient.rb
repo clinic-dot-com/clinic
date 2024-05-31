@@ -13,11 +13,16 @@
 #  role                   :string           default("patient"), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  doctor_category_id     :bigint
 #
 # Indexes
 #
 #  index_users_on_phone                 (phone) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (doctor_category_id => doctor_categories.id)
 #
 class Patient < User
 end
