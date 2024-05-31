@@ -26,6 +26,8 @@
 #
 class Doctor < User
   def self.ransackable_associations(_auth_object = nil)
-    ['doctor_category']
+    %w[doctor_category appointments]
   end
+
+  has_many :appointments, class_name: 'Appointment', dependent: :destroy
 end
