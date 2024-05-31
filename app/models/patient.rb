@@ -25,4 +25,7 @@
 #  fk_rails_...  (doctor_category_id => doctor_categories.id)
 #
 class Patient < User
+  def self.ransackable_associations(_auth_object = nil)
+    ['doctor_category']
+  end
 end

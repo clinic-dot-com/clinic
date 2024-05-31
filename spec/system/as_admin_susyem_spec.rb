@@ -29,4 +29,14 @@ RSpec.describe 'Signed as Admin', type: :system do
       expect(page).to have_selector '#page_title', exact_text: doctor.display_name
     end
   end
+
+  context 'when visit show page of Patients' do
+    let!(:patient) { FactoryBot.create(:user, role: 'patient', phone: '111111') }
+
+    before { visit admin_patient_path(patient) }
+
+    it 'should render index page properly' do
+      expect(page).to have_selector '#page_title', exact_text: patient.display_name
+    end
+  end
 end
