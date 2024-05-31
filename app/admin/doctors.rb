@@ -20,7 +20,7 @@ ActiveAdmin.register Doctor do
               data: {
                 method: :patch,
                 inputs: {
-                  'Doctor category': DoctorCategory.pluck(:name, :id).push(['blank', nil])
+                  'Doctor category': DoctorCategory.pluck(:name, :id).unshift(['blank', nil])
                 }.to_json
               }
     end
@@ -29,7 +29,7 @@ ActiveAdmin.register Doctor do
   index download_links: false do
     id_column
     column :phone
-    column :category
+    column :doctor_category
     column :created_at
     column :updated_at
     actions do |row|
@@ -39,7 +39,7 @@ ActiveAdmin.register Doctor do
               data: {
                 method: :patch,
                 inputs: {
-                  'Doctor category': DoctorCategory.pluck(:name, :id).push(['blank', nil])
+                  'Doctor category': DoctorCategory.pluck(:name, :id).unshift(['blank', nil])
                 }.to_json
               }
     end
