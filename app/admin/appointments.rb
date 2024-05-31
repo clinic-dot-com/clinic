@@ -41,11 +41,13 @@ ActiveAdmin.register Appointment do
   end
 
   member_action :create_appointment_form, method: :get do
+    authorize!(:create_appointment_form)
     @form = resource_class.new
     render partial: 'create_appointment_form'
   end
 
   member_action :submit_create_appointment, method: :post do
+    authorize!(:submit_create_appointment)
     permitted_params = params.require(:appointment).permit(:user_id, :doctor_id, :status)
     @form = Appointment.new(permitted_params)
     @form.save!

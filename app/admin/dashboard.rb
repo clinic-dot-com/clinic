@@ -4,7 +4,9 @@ ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
   action_item '' do
-    link_to 'Create Appointment', create_appointment_form_admin_appointment_path(id: current_user.id)
+    if authorized?(:create_appointment_form)
+      link_to 'Create Appointment', create_appointment_form_admin_appointment_path(id: current_user.id)
+    end
   end
 
   content title: proc { I18n.t('active_admin.dashboard') } do
