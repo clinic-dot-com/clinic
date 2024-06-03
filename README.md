@@ -6,19 +6,19 @@
 
 to sign in as admin use this super secure credentials:
 ```
-phone: 380970000000
+phone number: 380970000000
 password: qwerty80
 ```
 
 to sign in as doctor use this super secure credentials:
 ```
-phone: 888888
+phone number: 888888
 password: 888888
 ```
 
 to sign in as patient use this super secure credentials:
 ```
-phone: 111111
+phone number: 111111
 password: 111111
 ```
 The clinic management system
